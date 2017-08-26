@@ -9,7 +9,7 @@
           options: '=ngCropperOptions',
           showEvent: '=ngCropperShow',
           hideEvent: '=ngCropperHide',
-          proxy: '=?ngCropperProxy', // Optional.
+          proxy: '=?ngCropperProxy' // Optional.
         },
         link: function(scope, element, atts) {
           var shown = false;
@@ -29,8 +29,8 @@
 
           function setProxy() {
             if (!scope.proxy) return;
-            $parse(scope.proxy).assign(scope.$parent, function(action) {
-              cropperInstance[action]();
+            $parse(scope.proxy).assign(scope.$parent, function(action, args) {
+              cropperInstance[action].apply(cropperInstance, args);
             });
           }
 
